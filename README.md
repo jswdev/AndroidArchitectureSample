@@ -1,21 +1,21 @@
 # AndroidArchitectureSample
 
-Examples of using various architectures and third-party tools.
+   Examples of using various architectures and third-party tools.
 
-## Including:  
- ViewModel
- LiveData
- Hilt (for dependency injection)
- Kotlin Coroutines
- Retrofit
- Realm
- android Navigation
+## Including:   
+    ViewModel
+    LiveData
+    Hilt (for dependency injection)
+    Kotlin Coroutines
+    Retrofit
+    Realm
+    android Navigation
 
-## Api: 
+## Api:   
  https://rickandmortyapi.com/documentation/#rest
 
 
-## Reference:
+## Reference:   
  https://developer.android.com/jetpack/guide
  
 
