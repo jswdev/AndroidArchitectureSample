@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragmentFaces">
+    <fragment
+        android:id="@+id/fragmentFaces"
+        android:name="com.example.faceeditor.views.FragmentFaces"
+        android:label="fragment_faces"
+        tools:layout="@layout/fragment_faces" >
+        <action
+            android:id="@+id/action_fragmentFaces_to_bottomSheet"
+            app:destination="@id/bottomSheetFilter" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLogs"
+        android:name="com.example.faceeditor.views.FragmentLogs"
+        android:label="fragment_logs"
+        tools:layout="@layout/fragment_logs" />
+    <dialog
+        android:id="@+id/bottomSheetFilter"
+        android:name="com.example.faceeditor.views.FragmentFilter"
+        tools:layout="@layout/fragment_filter" />
+</navigation>

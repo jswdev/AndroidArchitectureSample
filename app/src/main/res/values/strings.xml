@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">FaceEditor</string>
+    <string name="drawer_open">Drawer opened</string>
+    <string name="drawer_close">Drawer closed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fab_content_desc">Filter</string>
+    <string name="face_image">faceImage</string>
+    <string name="text_view">TextView</string>
+    <string name="fragment_configs">FragmentConfigs</string>
+    <string name="fragment_logs">FragmentLogs</string>
+    <string name="fake_mail">example@gmail.com</string>
+
+
+    <string name="bottom_sheet_option_camera">Use Camera</string>
+    <string name="bottom_sheet_option_gallery">Upload from Gallery</string>
+    <string name="bottom_sheet_option_heading">Add Photo</string>
+    <string name="bottom_sheet_option_remove_photo">Remove Photo</string>
+
+    <string name="action_share">Share</string>
+    <string name="action_upload">Upload</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_print">Print</string>
+</resources>
