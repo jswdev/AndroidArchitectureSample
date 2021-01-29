@@ -26,7 +26,7 @@ class App: Application() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        remoteManager = RemoteManager(retrofit).getAPI()
+        remoteManager = RemoteManager(retrofit)
     }
 
     companion object {
@@ -43,7 +43,7 @@ class App: Application() {
             private set
 
         @JvmStatic
-        lateinit var remoteManager: RemoteService
+        lateinit var remoteManager: RemoteManager
             private set
 
     }

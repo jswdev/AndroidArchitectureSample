@@ -44,7 +44,7 @@ class RemoteManager(retrofit: Retrofit): RemoteDataSource() {
 
     fun getAPI(): RemoteService { return myAPI }
 
-    //suspend fun getAllMembers() = getResult { myAPI.getAllMembers() }
+    suspend fun getAllMembers() = getResult { myAPI.getAllMembers() }
 
-    //suspend fun getMember(id: Int) = getResult { myAPI.getMember(id) }
+    suspend fun getMember(id: Int) = getResult { myAPI.getMember(id) }
 }

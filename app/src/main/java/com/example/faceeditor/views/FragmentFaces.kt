@@ -29,7 +29,7 @@ class FragmentFaces : Fragment(), FragmentFilter.ItemClickListener {
     private lateinit var viewModel: TaskViewModel
     private val faceItems = ArrayList<FilterOutput>()
 
-    private val viewModelFactory by lazy { TaskViewModelFactory(App.dbManger) }
+    private val viewModelFactory by lazy { TaskViewModelFactory(App.dbManger, App.remoteManager) }
     private lateinit var recyclerView: RecyclerView
 
     private var toast: Toast? = null
