@@ -4,10 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.faceeditor.database.DBInterface
 import com.example.faceeditor.database.FilterInput
-import com.example.faceeditor.database.FilterOutput
+import com.example.faceeditor.database.Member
+import com.example.faceeditor.database.MemberList
+import com.example.faceeditor.extension.Resource
 import com.example.faceeditor.extension.SingleLiveEvent
 import com.example.faceeditor.models.RemoteManager
-import com.example.faceeditor.models.RemoteService
 import kotlinx.coroutines.*
 
 enum class TaskType{
@@ -21,29 +22,33 @@ class TaskViewModel(
 
     val dataLoading = SingleLiveEvent<Boolean>()
 
-    private var controll = ControlledTaskBehavior<MutableList<FilterOutput>>()
-    var contactsLiveData: MutableLiveData<MutableList<FilterOutput>> = MutableLiveData()
+    private var controll = ControlledTaskBehavior<MutableList<Member>>()
+    var contactsLiveData: MutableLiveData<MutableList<Member>> = MutableLiveData()
 
-    suspend fun getTasks(type: TaskType = TaskType.All, filter: FilterInput? = null){
+    suspend fun getTasks(type: TaskType = TaskType.All){
 
         dataLoading.value = true
 
-         val job = withContext(Dispatchers.IO) {
-             controll.cancelPreviousThenRun {
-                 delay(1000L)
-                 val result = when (type) {
-                     TaskType.All -> dbManger.getFaces(filter)
+        val local = dbManger.getFaces(FilterInput(sortOrder = "asc"))
+        contactsLiveData.value = local
+        val job = withContext(Dispatchers.IO) {
+            controll.cancelPreviousThenRun {
+                delay(1000L)
+                val result = when (type) {
+                    TaskType.All -> remoteService.getAllMembers()
 //                TaskType.Faces -> repository.getFacesFromRealm()
 //                TaskType.Logs -> repository.getLogsFromRealm()
 //                TaskType.Names -> repository.getNamesFromRealm()
-                     else -> dbManger.getFaces(null)
-                 }
-                 result
-             }
+                    else -> remoteService.getAllMembers()
+                }
+                result.data?.results?.takeIf { it.isNotEmpty() }?.run {
+
+                    dbManger.insertFaces(this)
+                    this
+                } ?: mutableListOf()
+            }
         }
-
         contactsLiveData.value = job
-
         dataLoading.value = false
     }
 }

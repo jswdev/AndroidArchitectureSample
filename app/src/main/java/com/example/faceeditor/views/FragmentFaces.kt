@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.faceeditor.App
 import com.example.faceeditor.R
-import com.example.faceeditor.database.FilterOutput
+import com.example.faceeditor.database.Member
 import com.example.faceeditor.viewModels.TaskType
 import com.example.faceeditor.viewModels.TaskViewModel
 import com.example.faceeditor.viewModels.TaskViewModelFactory
@@ -22,12 +22,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
-class FragmentFaces : Fragment(), FragmentFilter.ItemClickListener {
+class FragmentFaces : Fragment() {
     // TODO: Rename and change types of parameters
     private val scope = MainScope()
     private lateinit var viewModel: TaskViewModel
-    private val faceItems = ArrayList<FilterOutput>()
+    private val faceItems = ArrayList<Member>()
 
     private val viewModelFactory by lazy { TaskViewModelFactory(App.dbManger, App.remoteManager) }
     private lateinit var recyclerView: RecyclerView
@@ -38,10 +39,10 @@ class FragmentFaces : Fragment(), FragmentFilter.ItemClickListener {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(TaskViewModel::class.java)
-        viewModel.contactsLiveData.observe(viewLifecycleOwner, Observer { data ->
+        viewModel.contactsLiveData.observe(viewLifecycleOwner, Observer {
 
             faceItems.clear()
-            faceItems.addAll(data)
+            faceItems.addAll(it)
             recyclerView.adapter?.notifyDataSetChanged()
         })
 
@@ -89,20 +90,8 @@ class FragmentFaces : Fragment(), FragmentFilter.ItemClickListener {
 
         val fab = activity?.findViewById<FloatingActionButton>(R.id.floatingBtn)
         fab?.setOnClickListener {
-//            var navigation = findNavController()
-//            var bundle = Bundle()
 
-//            navigation.navigate(R.id.action_fragmentFaces_to_bottomSheet)
-//            navigation
-
-
-            scope.launch {
-
-                val a= App.remoteManager.getAllMembers()
-                val b= App.remoteManager.getMember(1)
-            }
-            val fragmentFilter = FragmentFilter(this)
-            activity?.let { fragmentFilter.show(it.supportFragmentManager, fragmentFilter.tag) }
+            getTaskList(TaskType.All)
         }
     }
 
@@ -113,10 +102,4 @@ class FragmentFaces : Fragment(), FragmentFilter.ItemClickListener {
             viewModel.getTasks(type)
         }
     }
-
-    override fun onItemClick(item: String?) {
-
-        getTaskList(TaskType.All)
-    }
-
 }

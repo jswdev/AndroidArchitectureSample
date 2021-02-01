@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.faceeditor.database.DBInterface
 import com.example.faceeditor.models.RemoteManager
-import com.example.faceeditor.models.RemoteService
 
 @Suppress("UNCHECKED_CAST")
 class TaskViewModelFactory constructor(

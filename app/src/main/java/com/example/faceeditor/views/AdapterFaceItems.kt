@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.faceeditor.R
-import com.example.faceeditor.database.FilterOutput
+import com.example.faceeditor.database.Member
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class AdapterFaceItems(private var context: Context, private var data: ArrayList<FilterOutput>) : RecyclerView.Adapter<AdapterFaceItems.ViewHolder>() {
+class AdapterFaceItems(private var context: Context, private var data: ArrayList<Member>) : RecyclerView.Adapter<AdapterFaceItems.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cell = LayoutInflater.from(context).inflate(R.layout.layout_face_items_cell, parent, false)
@@ -32,7 +32,7 @@ class AdapterFaceItems(private var context: Context, private var data: ArrayList
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val model = data[position]
-        Glide.with(context).load(model.snapshotByteArray).into(holder.imageView)
+        Glide.with(context).load(model.image).into(holder.imageView)
         holder.nameTextView.text = model.name
 
         holder.itemView.setOnClickListener{
@@ -69,18 +69,4 @@ class AdapterFaceItems(private var context: Context, private var data: ArrayList
         lateinit var imageView: ImageView
     }
 }
-
-//
-//class FaceItemCell(private var name: String, private var image: String){
-//
-//    fun getName(): String{
-//
-//        return name
-//    }
-//
-//    fun getImageURL(): String{
-//
-//        return "https://www.moshimoshi-nippon.jp/wp/wp-content/uploads/2018/11/47d3538e7b0c9249ab3c19e32370b4be.jpg"
-//    }
-//}
 
