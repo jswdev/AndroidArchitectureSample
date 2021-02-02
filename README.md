@@ -10,10 +10,18 @@
  Retrofit   
  Realm   
  android Navigation   
+ coroutine   
 
-## Api:   
+## Restful api:   
  https://rickandmortyapi.com/documentation/#rest   
 
+## component  
+material design [https://material.io/design]  
+material color design  
+recycle view  
+app top bar  
+floating action button
+button sheet dailog fragment
 
 ## Reference:   
  https://developer.android.com/jetpack/guide   
